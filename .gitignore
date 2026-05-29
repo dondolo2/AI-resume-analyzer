@@ -50,6 +50,3 @@ data/raw/
 .vscode/
 *.swp
 *.log
-
-# --- Docs (local notes only, not for repo) ---
-docs/
