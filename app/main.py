@@ -120,6 +120,17 @@ def _strength_radar(result: Dict[str, Any], resume_text: str) -> None:
     st.plotly_chart(fig, use_container_width=True)
 
 
+def _pdf_report(title: str, lines: List[str]) -> bytes:
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Helvetica", "B", 16)
+    pdf.cell(0, 10, title, new_x="LMARGIN", new_y="NEXT")
+    pdf.set_font("Helvetica", size=11)
+    for line in lines:
+        pdf.multi_cell(0, 8, line)
+    return bytes(pdf.output())
+
+
 
 
 def main() -> None:
