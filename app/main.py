@@ -227,6 +227,52 @@ def tab_single_match() -> None:
         st.text_area("Draft", result["cover_letter_draft"], height=200)
 
 
+def tab_strength() -> None:
+    st.header("Resume Strength Checker")
+    resume_file = st.file_uploader(
+        "Upload resume",
+        type=["pdf", "docx"],
+        key="strength_resume",
+    )
+    if st.button("Check strength", type="primary"):
+        if not resume_file:
+            st.error("Upload a resume to continue.")
+            return
+        try:
+            with st.spinner("Scoring resume strength..."):
+                text = sanitize_text(_read_upload(resume_file))
+                st.session_state.last_strength_result = cached_strength(text)
+                st.session_state.last_resume_text = text
+        except InvalidFileError as exc:
+            st.error(str(exc))
+
+    result = st.session_state.last_strength_result
+    if not result:
+        st.info("Upload a resume to see strength analysis.")
+        return
+
+    st.metric("Strength Score", f"{result['strength_score']}/100")
+    _strength_radar(result, st.session_state.last_resume_text)
+    for tip in result["feedback"]:
+        if "Good" in tip or "Multiple" in tip:
+            st.markdown(f"✅ {tip}")
+        elif "No projects" in tip or "Quantify" in tip:
+            st.markdown(f"❌ {tip}")
+        else:
+            st.markdown(f"💡 {tip}")
+
+    report_lines = [f"Strength Score: {result['strength_score']}/100", ""] + result[
+        "feedback"
+    ]
+    st.download_button(
+        "Download PDF report",
+        data=_pdf_report("Resume Strength Report", report_lines),
+        file_name="resume_strength_report.pdf",
+        mime="application/pdf",
+    )
+
+
+
 
 def main() -> None:
     """Run Streamlit application."""
