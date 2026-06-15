@@ -54,6 +54,12 @@ def _check_rate_limit() -> bool:
     return True
 
 
+def _read_upload(uploaded_file) -> str:
+    """Parse uploaded resume file to text."""
+    data = uploaded_file.getvalue()
+    return parse_uploaded_file(data, uploaded_file.name)
+
+
 
 
 def main() -> None:
