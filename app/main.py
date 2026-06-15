@@ -373,6 +373,28 @@ def main() -> None:
         layout="wide",
         initial_sidebar_state="expanded",
     )
+    _init_session_state()
+    _render_sidebar()
+
+    st.title("🎯 ResumeMatch AI")
+    st.caption("Production-grade resume analysis, matching, and ranking")
+
+    tab1, tab2, tab3, tab4 = st.tabs(
+        [
+            "Single Match",
+            "Strength Checker",
+            "Compare Resumes",
+            "Batch Ranking",
+        ]
+    )
+    with tab1:
+        tab_single_match()
+    with tab2:
+        tab_strength()
+    with tab3:
+        tab_compare()
+    with tab4:
+        tab_batch()
 
 
 if __name__ == "__main__":
