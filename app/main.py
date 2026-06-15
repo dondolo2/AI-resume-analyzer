@@ -88,6 +88,37 @@ def _skills_chart(matched: List[str], missing: List[str]) -> None:
     st.bar_chart(df.set_index("Category"))
 
 
+def _strength_radar(result: Dict[str, Any], resume_text: str) -> None:
+    engine = get_engine()
+    skills = engine.analyze_resume(resume_text)
+    years = skills["experience_years"]
+    edu_map = {
+        "PhD": 100,
+        "Master": 80,
+        "Bachelor": 60,
+        "High School": 40,
+        "Unknown": 20,
+    }
+    edu_score = edu_map.get(skills["education"], 20)
+    skill_score = min(len(skills["skills"]) * 10, 100)
+    exp_score = min(years * 15, 100)
+    project_score = 100 if "—" in resume_text or "–" in resume_text else 40
+
+    fig = go.Figure(
+        data=go.Scatterpolar(
+            r=[skill_score, exp_score, edu_score, project_score],
+            theta=["Skills", "Experience", "Education", "Projects"],
+            fill="toself",
+            name="Resume",
+        )
+    )
+    fig.update_layout(
+        polar=dict(radialaxis=dict(visible=True, range=[0, 100])),
+        showlegend=False,
+        margin=dict(l=40, r=40, t=40, b=40),
+    )
+    st.plotly_chart(fig, use_container_width=True)
+
 
 
 
