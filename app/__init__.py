@@ -1,30 +1,18 @@
-"""Resume Match AI application package."""
+"""Application package entry point and shared constants."""
 
-import logging
-import os
+from __future__ import annotations
+
 from pathlib import Path
 
-from dotenv import load_dotenv
 
-load_dotenv()
-
-LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
-logging.basicConfig(
-    level=getattr(logging, LOG_LEVEL, logging.INFO),
-    format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
-)
-
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DATA_DIR = PROJECT_ROOT / "data"
-DEFAULT_SKILL_DICT_PATH = DATA_DIR / "skills_list.json"
-
-SPACY_MODEL = os.getenv("SPACY_MODEL", "en_core_web_sm")
-MAX_FILE_SIZE = int(os.getenv("MAX_FILE_SIZE", "10485760"))
+PACKAGE_ROOT = Path(__file__).resolve().parent
+PROJECT_ROOT = PACKAGE_ROOT.parent
+DEFAULT_SKILL_DICT_PATH = PROJECT_ROOT / "data" / "skills_list.json"
+SPACY_MODEL = "en_core_web_sm"
+MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB
 
 __all__ = [
-    "DATA_DIR",
     "DEFAULT_SKILL_DICT_PATH",
-    "MAX_FILE_SIZE",
-    "PROJECT_ROOT",
     "SPACY_MODEL",
+    "MAX_FILE_SIZE",
 ]

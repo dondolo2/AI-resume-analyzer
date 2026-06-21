@@ -1,21 +1,25 @@
+"""Application-specific exception classes."""
+
+from __future__ import annotations
+
+
+class InvalidFileError(Exception):
+    """Raised when uploaded or parsed file content is invalid."""
+
+
+class InvalidJobDescriptionError(ValueError):
+    """Raised when a job description is missing or invalid."""
+
+
+class InvalidResumeError(ValueError):
+    """Raised when a resume text is missing or invalid."""
+
+
+class SkillDictionaryError(Exception):
+    """Raised when the skill dictionary fails to load or is invalid."""
 """Custom exceptions for Resume Match AI."""
 
 
 class ResumeMatchError(Exception):
     """Base exception for application errors."""
 
-
-class InvalidResumeError(ResumeMatchError):
-    """Raised when resume text is empty or invalid."""
-
-
-class InvalidJobDescriptionError(ResumeMatchError):
-    """Raised when job description text is empty or invalid."""
-
-
-class InvalidFileError(ResumeMatchError):
-    """Raised when an uploaded file is invalid or unsupported."""
-
-
-class SkillDictionaryError(ResumeMatchError):
-    """Raised when the skill dictionary cannot be loaded."""
