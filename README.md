@@ -7,7 +7,7 @@
 
 ## 🚀 Live Demo
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](YOUR_DEPLOYMENT_URL_HERE)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ai-resume-analyzer-7x.streamlit.app/)
 
 ## 📸 Screenshots
 
@@ -102,7 +102,7 @@ Coverage is enforced at **≥ 85%** in CI. See the Codecov badge above after con
 **Bongiwe Dipodi** — Matching Engine & UI  
 **Mosa Dondolo** — Resume Processing Pipeline  
 
-| [GitHub](https://github.com/BongiweDipodi) | [Repository](https://github.com/BongiweDipodi/AI-resume-analyzer) |
+| [GitHub](https://github.com/donodlo2) | [Repository](https://github.com/dondolo2/AI-resume-analyzer) |
 
 ## 📄 License
 
